@@ -26016,7 +26016,7 @@
 	            'Created by ',
 	            React.createElement(
 	              'a',
-	              { href: '', target: '_blank' },
+	              { href: 'https://github.com/gwynevans/udemy-react-timer', target: '_blank' },
 	              'Gwyn Evans'
 	            )
 	          )
