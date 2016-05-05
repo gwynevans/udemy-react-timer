@@ -14,7 +14,7 @@ var Navigation = React.createClass({
         </div>
         <div className="top-bar-right">
           <ul className="menu">
-            <li className="menu-text">Created by <a href="" target="_blank">Gwyn Evans</a></li>
+            <li className="menu-text">Created by <a href="https://github.com/gwynevans/udemy-react-timer" target="_blank">Gwyn Evans</a></li>
           </ul>
         </div>
       </div>
