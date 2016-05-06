@@ -14,6 +14,12 @@ module.exports = {
        '$': 'jquery',
        'jQuery': 'jquery',
     }),
+    function() {
+      this.plugin('watch-run', function(watching, callback) {
+        console.log('Begin compile at ' + new Date());
+        callback();
+      })
+    }
   ],
   output: {
     path: __dirname,
@@ -22,11 +28,12 @@ module.exports = {
   resolve: {
     root: __dirname,
     alias: {
-      Countdown:          'app/components/Countdown.jsx',
-      Main:               'app/components/Main.jsx',
-      Navigation:         'app/components/Navigation.jsx',
-      Timer:              'app/components/Timer.jsx',
-      applicationStyles:  'app/styles/app.scss'
+      Clock:             'app/components/Clock.jsx',
+      Countdown:         'app/components/Countdown.jsx',
+      Main:              'app/components/Main.jsx',
+      Navigation:        'app/components/Navigation.jsx',
+      Timer:             'app/components/Timer.jsx',
+      applicationStyles: 'app/styles/app.scss'
     },
     extensions: ['', '.js', '.jsx']
   },
