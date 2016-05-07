@@ -25357,16 +25357,62 @@
 	  displayName: 'Timer',
 
 
+	  getInitialState: function getInitialState() {
+	    return {
+	      count: 0,
+	      timerStatus: 'paused'
+	    };
+	  },
+
+	  componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
+	    if (this.state.timerStatus !== prevState.timerStatus) {
+	      switch (this.state.timerStatus) {
+	        case 'started':
+	          this.startTimer();
+	          break;
+	        case 'stopped':
+	          this.setState({ count: 0 });
+	        case 'paused':
+	          clearInterval(this.timer);
+	          this.timer = undefined;
+	          break;
+	      }
+	    }
+	  },
+
+	  componentWillUnmount: function componentWillUnmount() {
+	    clearInterval(this.timer);
+	    this.timer = undefined;
+	  },
+
+	  startTimer: function startTimer() {
+	    var _this = this;
+
+	    this.timer = setInterval(function () {
+	      _this.setState({ count: _this.state.count + 1 });
+	    }, 1000);
+	  },
+
+	  handleStatusChange: function handleStatusChange(newStatus) {
+	    this.setState({ timerStatus: newStatus });
+	  },
+
 	  render: function render() {
+	    var _state = this.state;
+	    var count = _state.count;
+	    var timerStatus = _state.timerStatus;
+
+
 	    return React.createElement(
 	      'div',
 	      null,
 	      React.createElement(
-	        'p',
-	        null,
-	        'Timer.jsx'
+	        'h3',
+	        { className: 'page-title' },
+	        'Timer App'
 	      ),
-	      React.createElement(Clock, { totalSeconds: 10 })
+	      React.createElement(Clock, { totalSeconds: count }),
+	      React.createElement(Controls, { currentStatus: timerStatus, onStatusChange: this.handleStatusChange })
 	    );
 	  }
 	});
@@ -25500,7 +25546,7 @@
 
 	    var renderControlArea = function renderControlArea() {
 	      if (countdownStatus !== 'stopped') {
-	        return React.createElement(Controls, { countdownStatus: countdownStatus, onStatusChange: _this2.handleStatusChange });
+	        return React.createElement(Controls, { currentStatus: countdownStatus, onStatusChange: _this2.handleStatusChange });
 	      } else {
 	        return React.createElement(CountdownForm, { onSetCountdown: _this2.handleSetCountdown });
 	      }
@@ -25965,7 +26011,7 @@
 
 
 	  propTypes: {
-	    countdownStatus: React.PropTypes.string.isRequired,
+	    currentStatus: React.PropTypes.string.isRequired,
 	    onStatusChange: React.PropTypes.func.isRequired
 	  },
 
@@ -25980,16 +26026,16 @@
 	  render: function render() {
 	    var _this2 = this;
 
-	    var countdownStatus = this.props.countdownStatus;
+	    var currentStatus = this.props.currentStatus;
 
 	    var renderStartStopButton = function renderStartStopButton() {
-	      if (countdownStatus === 'started') {
+	      if (currentStatus === 'started') {
 	        return React.createElement(
 	          'button',
 	          { className: 'button secondary', onClick: _this2.onStatusChange('paused') },
 	          'Pause'
 	        );
-	      } else if (countdownStatus === 'paused') {
+	      } else {
 	        return React.createElement(
 	          'button',
 	          { className: 'button primary', onClick: _this2.onStatusChange('started') },
