@@ -9,7 +9,6 @@ var Timer = React.createClass({
       <div>
         <p>Timer.jsx</p>
           <Clock totalSeconds={10}/>
-          <Controls countdownStatus="started"/>
       </div>
     );
   }
