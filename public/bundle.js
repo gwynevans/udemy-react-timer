@@ -25453,8 +25453,6 @@
 	    });
 	  },
 
-	  componentWillUpdate: function componentWillUpdate(nextProps, nextState) {},
-
 	  componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
 	    if (this.state.countdownStatus !== prevState.countdownStatus) {
 	      switch (this.state.countdownStatus) {
@@ -25472,17 +25470,8 @@
 	  },
 
 	  componentWillUnmount: function componentWillUnmount() {
-	    console.log('componentWillUnmount');
 	    clearInterval(this.timer);
 	    this.timer = undefined;
-	  },
-
-	  componentWillMount: function componentWillMount() {
-	    console.log('componentWillMount');
-	  },
-
-	  componentDidMount: function componentDidMount() {
-	    console.log('componentDidMount');
 	  },
 
 	  startTimer: function startTimer() {
