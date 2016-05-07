@@ -25351,6 +25351,7 @@
 
 	var React = __webpack_require__(8);
 	var Clock = __webpack_require__(230);
+	var Controls = __webpack_require__(239);
 
 	var Timer = React.createClass({
 	  displayName: 'Timer',
@@ -25365,7 +25366,8 @@
 	        null,
 	        'Timer.jsx'
 	      ),
-	      React.createElement(Clock, { totalSeconds: 10 })
+	      React.createElement(Clock, { totalSeconds: 10 }),
+	      React.createElement(Controls, { countdownStatus: 'started' })
 	    );
 	  }
 	});
@@ -25918,6 +25920,56 @@
 
 	// exports
 
+
+/***/ },
+/* 239 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(8);
+
+	var Controls = React.createClass({
+	  displayName: 'Controls',
+
+
+	  propTypes: {
+	    countdownStatus: React.PropTypes.string.isRequired
+	  },
+
+	  render: function render() {
+	    var countdownStatus = this.props.countdownStatus;
+
+	    var renderStartStopButton = function renderStartStopButton() {
+	      if (countdownStatus === 'started') {
+	        return React.createElement(
+	          'button',
+	          { className: 'button secondary' },
+	          'Pause'
+	        );
+	      } else if (countdownStatus === 'paused') {
+	        return React.createElement(
+	          'button',
+	          { className: 'button primary' },
+	          'Start'
+	        );
+	      }
+	    };
+
+	    return React.createElement(
+	      'div',
+	      null,
+	      renderStartStopButton(),
+	      React.createElement(
+	        'button',
+	        { className: 'button alert hollow' },
+	        'Clear'
+	      )
+	    );
+	  }
+	});
+
+	module.exports = Controls;
 
 /***/ }
 /******/ ]);
