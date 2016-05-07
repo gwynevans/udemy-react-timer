@@ -25474,11 +25474,11 @@
 
 	    this.timer = setInterval(function () {
 	      var newCount = _this.state.count - 1;
-	      if (newCount <= 0) {
-	        newCount = 0;
-	        clearInterval(_this.timer);
+	      if (newCount > 0) {
+	        _this.setState({ count: newCount });
+	      } else {
+	        _this.setState({ countdownStatus: 'stopped' });
 	      }
-	      _this.setState({ count: newCount });
 	    }, 1000);
 	  },
 

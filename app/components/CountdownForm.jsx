@@ -24,4 +24,4 @@ var CountdownForm = React.createClass({
   }
 });
 
-module.exports = CountdownForm
+module.exports = CountdownForm;
