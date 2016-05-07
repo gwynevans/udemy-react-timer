@@ -19,6 +19,10 @@ var Countdown = React.createClass({
     });
   },
 
+  componentWillUpdate: function (nextProps, nextState) {
+
+  },
+
   componentDidUpdate: function (prevProps, prevState) {
     if (this.state.countdownStatus !== prevState.countdownStatus) {
       switch (this.state.countdownStatus) {
@@ -33,6 +37,20 @@ var Countdown = React.createClass({
           break;
       }
     }
+  },
+
+  componentWillUnmount: function () {
+    console.log('componentWillUnmount');
+    clearInterval(this.timer);
+    this.timer = undefined;
+  },
+
+  componentWillMount: function () {
+    console.log('componentWillMount');
+  },
+
+  componentDidMount: function () {
+    console.log('componentDidMount');
   },
 
   startTimer: function () {
